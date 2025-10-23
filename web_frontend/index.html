@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA Conversacional - Chat Widget</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>IA Conversacional Multiplataforma</h1>
+            <p>Demonstração de Chat Widget</p>
+        </header>
+
+        <main class="main-content">
+            <section class="info-section">
+                <h2>Bem-vindo ao Chat Inteligente</h2>
+                <p>
+                    Esta é uma demonstração de um assistente de IA que pode atender clientes 
+                    em múltiplos canais (Web, WhatsApp, Telegram, Instagram, Facebook).
+                </p>
+                <p>
+                    O sistema utiliza inteligência artificial para fornecer respostas personalizadas 
+                    e manter o contexto da conversa.
+                </p>
+            </section>
+
+            <section class="chat-section">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <h3>Chat com IA</h3>
+                        <button id="clearBtn" class="clear-btn" title="Limpar histórico">🗑️</button>
+                    </div>
+                    
+                    <div id="chatMessages" class="chat-messages">
+                        <div class="message bot-message">
+                            <div class="message-content">
+                                Olá! 👋 Sou um assistente de IA. Como posso ajudá-lo hoje?
+                            </div>
+                            <span class="message-time">agora</span>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-area">
+                        <input 
+                            type="text" 
+                            id="messageInput" 
+                            class="message-input" 
+                            placeholder="Digite sua mensagem..."
+                            autocomplete="off"
+                        >
+                        <button id="sendBtn" class="send-btn" title="Enviar mensagem">
+                            ➤
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features-section">
+                <h2>Recursos Disponíveis</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Múltiplos Canais</h3>
+                        <p>Web, WhatsApp, Telegram, Instagram, Facebook</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h3>IA Inteligente</h3>
+                        <p>Powered by OpenAI GPT-3.5</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💾</div>
+                        <h3>Histórico</h3>
+                        <p>Mantém contexto das conversas</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Rápido</h3>
+                        <p>Respostas em tempo real</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="config-section">
+                <h2>Configuração</h2>
+                <div class="config-form">
+                    <div class="form-group">
+                        <label for="apiUrl">URL da API:</label>
+                        <input 
+                            type="text" 
+                            id="apiUrl" 
+                            class="form-input" 
+                            value="http://localhost:3000"
+                            placeholder="http://localhost:3000"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="userId">ID do Usuário:</label>
+                        <input 
+                            type="text" 
+                            id="userId" 
+                            class="form-input" 
+                            placeholder="user123"
+                        >
+                        <button id="generateUserBtn" class="small-btn">Gerar ID</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="channel">Canal:</label>
+                        <select id="channel" class="form-input">
+                            <option value="web">Web</option>
+                            <option value="whatsapp">WhatsApp</option>
+                            <option value="telegram">Telegram</option>
+                            <option value="instagram">Instagram</option>
+                            <option value="facebook">Facebook</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <section class="status-section">
+                <h2>Status da Conexão</h2>
+                <div id="statusBox" class="status-box">
+                    <div class="status-item">
+                        <span class="status-label">API Status:</span>
+                        <span id="apiStatus" class="status-value disconnected">Desconectado</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Mensagens Enviadas:</span>
+                        <span id="messageCount" class="status-value">0</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Última Atualização:</span>
+                        <span id="lastUpdate" class="status-value">-</span>
+                    </div>
+                </div>
+                <button id="testConnectionBtn" class="test-btn">Testar Conexão</button>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>IA Conversacional Multiplataforma © 2024 - Desenvolvido por Gabriel Demetrios Lafis</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
