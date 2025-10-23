@@ -313,10 +313,11 @@ app.use((err, req, res, next) => {
 });
 
 /**
- * Iniciar servidor
+ * Iniciar servidor apenas se não estiver em modo de teste
  */
-app.listen(PORT, () => {
-  console.log(`
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`
 ╔════════════════════════════════════════════════════════════════╗
 ║  IA Conversacional Multiplataforma - Backend Node.js           ║
 ║  Iniciando servidor em http://localhost:${PORT}                   ║
@@ -326,8 +327,9 @@ app.listen(PORT, () => {
 ║  - GET  /api/conversation/<user_id>/<channel>                  ║
 ║  - DELETE /api/conversation/<user_id>/<channel>                ║
 ╚════════════════════════════════════════════════════════════════╝
-  `);
-});
+    `);
+  });
+}
 
 export default app;
 
