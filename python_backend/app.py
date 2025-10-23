@@ -10,8 +10,8 @@ from datetime import datetime
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import openai
-from pydantic import BaseModel
+from openai import OpenAI
+from pydantic import BaseModel, ValidationError
 from typing import Optional, List
 
 # Carregar variáveis de ambiente
@@ -22,7 +22,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Configurar OpenAI
-openai.api_key = os.getenv('OPENAI_API_KEY')
+client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 # Armazenar conversas em memória (em produção, usar banco de dados)
 conversations = {}
@@ -101,7 +101,7 @@ def generate_ai_response(user_id: str, channel: str, user_message: str) -> str:
         messages.append({"role": "user", "content": user_message})
         
         # Chamar API OpenAI
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=messages,
             temperature=0.7,
@@ -147,30 +147,40 @@ def chat():
     try:
         data = request.get_json()
         
-        # Validar dados
-        if not data or not all(k in data for k in ['user_id', 'channel', 'text']):
+        # Validar dados com Pydantic
+        try:
+            message = Message(**data)
+        except ValidationError as e:
             return jsonify({
-                "error": "Campos obrigatórios: user_id, channel, text"
+                "error": "Dados inválidos",
+                "details": e.errors()
             }), 400
-        
-        user_id = data['user_id']
-        channel = data['channel']
-        user_message = data['text']
         
         # Validar canal
         valid_channels = ['whatsapp', 'telegram', 'web', 'instagram', 'facebook']
-        if channel not in valid_channels:
+        if message.channel not in valid_channels:
             return jsonify({
                 "error": f"Canal inválido. Canais suportados: {', '.join(valid_channels)}"
             }), 400
         
+        # Validar tamanho da mensagem
+        if len(message.text) > 4000:
+            return jsonify({
+                "error": "Mensagem muito longa. Máximo: 4000 caracteres"
+            }), 400
+        
+        if len(message.text.strip()) == 0:
+            return jsonify({
+                "error": "Mensagem não pode estar vazia"
+            }), 400
+        
         # Gerar resposta da IA
-        ai_response = generate_ai_response(user_id, channel, user_message)
+        ai_response = generate_ai_response(message.user_id, message.channel, message.text)
         
         return jsonify({
-            "user_id": user_id,
-            "channel": channel,
-            "user_message": user_message,
+            "user_id": message.user_id,
+            "channel": message.channel,
+            "user_message": message.text,
             "ai_response": ai_response,
             "timestamp": datetime.now().isoformat()
         }), 200
