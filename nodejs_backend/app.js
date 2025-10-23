@@ -145,11 +145,31 @@ app.post('/api/chat', async (req, res) => {
       });
     }
 
+    // Validar tipos
+    if (typeof user_id !== 'string' || typeof channel !== 'string' || typeof text !== 'string') {
+      return res.status(400).json({
+        error: 'Todos os campos devem ser strings',
+      });
+    }
+
     // Validar canal
     const validChannels = ['whatsapp', 'telegram', 'web', 'instagram', 'facebook'];
     if (!validChannels.includes(channel)) {
       return res.status(400).json({
         error: `Canal inválido. Canais suportados: ${validChannels.join(', ')}`,
+      });
+    }
+
+    // Validar tamanho da mensagem
+    if (text.length > 4000) {
+      return res.status(400).json({
+        error: 'Mensagem muito longa. Máximo: 4000 caracteres',
+      });
+    }
+
+    if (text.trim().length === 0) {
+      return res.status(400).json({
+        error: 'Mensagem não pode estar vazia',
       });
     }
 

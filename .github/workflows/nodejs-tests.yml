@@ -1,0 +1,68 @@
+name: Node.js Backend Tests
+
+on:
+  push:
+    branches: [ main, develop, copilot/** ]
+    paths:
+      - 'nodejs_backend/**'
+      - '.github/workflows/nodejs-tests.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'nodejs_backend/**'
+      - '.github/workflows/nodejs-tests.yml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: ['20.x', '22.x']
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: nodejs_backend/package-lock.json
+    
+    - name: Install dependencies
+      run: |
+        cd nodejs_backend
+        npm ci
+    
+    - name: Run linter (if configured)
+      run: |
+        cd nodejs_backend
+        echo "Linting step (add ESLint if needed)"
+      continue-on-error: true
+    
+    - name: Run tests
+      run: |
+        cd nodejs_backend
+        npm test
+      env:
+        OPENAI_API_KEY: test_key_for_ci
+        NODE_ENV: test
+    
+    - name: Run tests with coverage
+      run: |
+        cd nodejs_backend
+        npm run test:coverage
+      env:
+        OPENAI_API_KEY: test_key_for_ci
+        NODE_ENV: test
+      continue-on-error: true
+    
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        files: ./nodejs_backend/coverage/coverage-final.json
+        flags: nodejs
+        name: nodejs-coverage
+      continue-on-error: true
