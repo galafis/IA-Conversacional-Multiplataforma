@@ -28,12 +28,24 @@ MANIFEST
 venv/
 env/
 
+# Python testing
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+*.cover
+.tox/
+
 # Node.js
 node_modules/
 npm-debug.log
 yarn-error.log
 package-lock.json
 yarn.lock
+
+# Node.js testing
+coverage/
+.nyc_output/
 
 # IDE
 .vscode/
