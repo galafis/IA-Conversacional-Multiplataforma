@@ -12,6 +12,9 @@ on:
       - 'python_backend/**'
       - '.github/workflows/python-tests.yml'
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest

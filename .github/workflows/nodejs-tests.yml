@@ -12,6 +12,9 @@ on:
       - 'nodejs_backend/**'
       - '.github/workflows/nodejs-tests.yml'
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
