@@ -495,5 +495,43 @@ Se você tiver dúvidas ou precisar de ajuda:
 
 ---
 
+## 🇬🇧 Multi-Platform Conversational AI
+
+This project provides a robust and flexible **Conversational AI Assistant** designed for automatic customer service across **multiple channels**. The backend is available in two versions — **Python (Flask)** and **Node.js (Express)** — for maximum adaptability.
+
+### Key Features
+
+- **Multi-platform:** Native support for Web, WhatsApp, Telegram, Instagram, and Facebook Messenger
+- **Conversation Context:** Maintains recent conversation history for fluid, relevant interactions
+- **Dual Backend:** Complete implementations in Python (Flask) and Node.js (Express)
+- **Easy Deployment:** Configuration via environment variables and Docker support
+
+### Quick Start
+
+```bash
+git clone https://github.com/galafis/IA-Conversacional-Multiplataforma.git
+cd IA-Conversacional-Multiplataforma
+
+# Python backend
+cd python_backend && pip install -r requirements.txt && python app.py
+
+# OR Node.js backend
+cd nodejs_backend && npm install && npm start
+```
+
+### API Endpoints
+
+| Method | Route | Description |
+|--------|-------|-------------|
+| `POST` | `/api/chat` | Send a message and receive AI response |
+| `GET` | `/health` | Health check |
+| `GET` | `/api/conversation/:user_id/:channel` | Get conversation history |
+| `DELETE` | `/api/conversation/:user_id/:channel` | Clear conversation history |
+
+For full documentation in Portuguese, see the sections above.
+
+---
+
 **⭐ Se este projeto foi útil para você, considere dar uma estrela!**
+
 
