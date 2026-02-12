@@ -58,7 +58,7 @@
 │              └────────────────────────────┘                      │
 │                                                                  │
 │  • Recebe mensagem + contexto                                   │
-│  • Gera resposta inteligente                                    │
+│  • Gera resposta baseada no histórico                           │
 │  • Retorna resposta                                             │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -193,16 +193,10 @@ IA-Conversacional-Multiplataforma/
 │   ├── script.js           # Lógica JavaScript
 │   └── styles.css          # Estilos CSS
 │
-├── .github/
-│   └── workflows/          # GitHub Actions CI/CD
-│       ├── python-tests.yml
-│       └── nodejs-tests.yml
-│
 ├── docker-compose.yml      # Orquestração de containers
 ├── nginx.conf             # Configuração Nginx
 ├── README.md              # Documentação principal
 ├── CONTRIBUTING.md        # Guia de contribuição
-├── CHANGELOG.md           # Histórico de mudanças
 └── LICENSE                # Licença MIT
 ```
 
@@ -228,7 +222,6 @@ IA-Conversacional-Multiplataforma/
 ### DevOps
 - Docker & Docker Compose
 - Nginx
-- GitHub Actions
 
 ### IA
 - OpenAI GPT-3.5-turbo (configurável)
@@ -275,12 +268,3 @@ AI_SYSTEM_PROMPT="Você é um assistente..."
 - ✅ CORS configurável
 - ✅ Variáveis de ambiente
 - ✅ Tratamento de erros
-
-### Recomendado para Produção:
-- 🔲 Rate limiting
-- 🔲 Autenticação JWT
-- 🔲 HTTPS/SSL
-- 🔲 Firewall de aplicação web (WAF)
-- 🔲 Logs estruturados
-- 🔲 Monitoramento 24/7
-- 🔲 Backup automático

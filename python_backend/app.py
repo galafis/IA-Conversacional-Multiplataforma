@@ -5,7 +5,6 @@ Descrição: API Flask para processamento de mensagens com IA em múltiplos cana
 """
 
 import os
-import json
 from datetime import datetime
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify

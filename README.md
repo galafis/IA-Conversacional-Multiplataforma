@@ -242,15 +242,6 @@ npm run test:watch
 
 **Status:** ✅ Todos os 22 testes passando
 
-### CI/CD
-
-O projeto utiliza GitHub Actions para executar os testes automaticamente em cada push ou pull request:
-
-- **Python Tests:** Executa em Python 3.11 e 3.12
-- **Node.js Tests:** Executa em Node.js 20.x e 22.x
-
-Os badges no topo deste README mostram o status atual dos testes.
-
 ---
 
 ## 📚 Documentação da API
@@ -530,6 +521,5 @@ For full documentation in Portuguese, see the sections above.
 
 ---
 
-**⭐ Se este projeto foi útil para você, considere dar uma estrela!**
 
 
