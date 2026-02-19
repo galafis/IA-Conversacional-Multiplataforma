@@ -1,0 +1,6 @@
+Flask
+Flask-Cors
+openai
+pydantic
+pytest
+python-dotenv
